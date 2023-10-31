@@ -1,3 +1,5 @@
+all: hw1
+
 TARGET:= hw1
 
 $(TARGET): $(TARGET)_s.o $(TARGET)_c.o
