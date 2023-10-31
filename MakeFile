@@ -1,20 +1,10 @@
-TARGET=hw1
+TARGET:= hw1
 
-CC=arm-linux-gnueabi-gcc
+$(TARGET): $(TARGET)_s.o $(TARGET)_c.o
+	arm-linux-gnueabi-gcc $(TARGET)_s.o $(TARGET)_c.o -o $(TARGET)
 
-all: test
+$(TARGET)_s.o: $(TARGET).s
+	arm-linux-gnueabi-as $(TARGET).s -o $(TARGET)_s.o
 
-build:
-	$(CC) -o $(TARGET) $(TARGET).c asum.s
-
-test: build
-	qemu-arm -L /usr/arm-linux-gnueabi $(TARGET) $(ARGS)
-
-clean:
-	rm -f $(TARGET)
-	rm -f *.o
-
-.PHONY: test
-
-%:
-	@$(MAKE) test ARGS=$@
+$(TARGET)_c.o: $(TARGET)_main.c
+	arm-linux-gnueabi-gcc -static -c $(TARGET)_main.c -o $(TARGET)_c.o
