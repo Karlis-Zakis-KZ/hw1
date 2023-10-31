@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "hw1.h"
+#include "asum.h"
 
 int main(int argc, char *argv[])
 {
