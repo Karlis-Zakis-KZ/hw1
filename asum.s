@@ -1,7 +1,4 @@
-.text
-.align 2
 .global asum
-.type asum, %function
 
 asum:
   mov r5, #0
