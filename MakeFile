@@ -1,4 +1,4 @@
-TARGET:= md1
+TARGET:= hw1
 
 $(TARGET): $(TARGET)_s.o $(TARGET)_c.o
 	arm-linux-gnueabi-gcc $(TARGET)_s.o $(TARGET)_c.o -o $(TARGET)
