@@ -1,18 +1,20 @@
-.section .text
+TARGET=hw1
 
-.global asum
+CC=arm-linux-gnueabi-gcc
 
-asum:
-  push {r5}
-  mov r5, #0
-  cmp r0, #0
-  beq end
-loop:
-  add r5, r5, r0
-  sub r0, r0, #1
-  cmp r0, #0
-  bne loop
-end:
-  mov r0, r5
-  pop {r5}
-  bx lr
+all: test
+
+build:
+	$(CC) -o $(TARGET) $(TARGET).c asum.s
+
+test: build
+	qemu-arm -L /usr/arm-linux-gnueabi $(TARGET) $(ARGS)
+
+clean:
+	rm -f $(TARGET)
+	rm -f *.o
+
+.PHONY: test
+
+%:
+	@$(MAKE) test ARGS=$@
